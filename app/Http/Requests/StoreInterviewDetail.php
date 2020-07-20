@@ -26,12 +26,12 @@ class StoreInterviewDetail extends FormRequest
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
             return [
                 'location' => 'sometimes|string',
-                'date_time' => 'sometimes|date_format:Y-m-d H:i:s'
+                'date_time' => 'sometimes|date_format:Y-m-d\TH:i'
             ];
         } else {
             return [
                 'location' => 'required|string',
-                'date_time' => 'required|date_format:Y-m-d H:i:s'
+                'date_time' => 'required|date_format:Y-m-d\TH:i'
             ];
         }
     }

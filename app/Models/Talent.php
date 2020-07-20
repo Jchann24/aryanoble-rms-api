@@ -3,14 +3,21 @@
 namespace App\models;
 
 use App\Models\User;
+use eloquentFilter\QueryFilter\ModelFilters\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Talent extends Model
 {
-    use SoftDeletes;
+    use Filterable, SoftDeletes;
 
     protected $table = 'talents';
+
+    private static $whiteListFilter = [
+        'email',
+        'name'
+    ];
+
     protected $guarded = [];
 
     public function pic()

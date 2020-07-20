@@ -26,16 +26,17 @@ class CandidateCardController extends Controller
     {
         $loggedInUser = Auth::user()->id;
 
-        return CandidateCardResource::collection(
-            CandidateCard::whereHas('erf', function ($q) {
-                $loggedInUser = Auth::user()->id;
-                $q->where('erfs.div_user_id', $loggedInUser);
-            })
-                ->orWhere("pic_id", $loggedInUser)
-                ->orWhere("candidate_id", $loggedInUser)
-                ->latest()
-                ->paginate(20)
-        );
+        return Auth::user()->group_id == 2 ?
+            CandidateCardResource::collection(CandidateCard::latest()->paginate(6)) : CandidateCardResource::collection(
+                CandidateCard::whereHas('erf', function ($q) {
+                    $loggedInUser = Auth::user()->id;
+                    $q->where('erfs.div_user_id', $loggedInUser);
+                })
+                    ->orWhere("pic_id", $loggedInUser)
+                    ->orWhere("candidate_id", $loggedInUser)
+                    ->latest()
+                    ->paginate(6)
+            );
     }
 
     /**
@@ -99,6 +100,8 @@ class CandidateCardController extends Controller
 
             if ($candidateCard->pic_id == $user->id) {
                 $validated = $request->validated();
+                $validated['last_updated_by_id'] = $user->id;
+
                 $candidateCard->update($validated);
                 return new CandidateCardResource($candidateCard);
             } else {
@@ -109,6 +112,8 @@ class CandidateCardController extends Controller
 
             if ($candidateCard->erf->div_user_id == $user->id) {
                 $validated = $request->validated();
+                $validated['last_updated_by_id'] = $user->id;
+
                 $candidateCard->update($validated);
                 return new CandidateCardResource($candidateCard);
             } else {
@@ -118,6 +123,7 @@ class CandidateCardController extends Controller
         } else {
 
             $validated = $request->validated();
+            $validated['last_updated_by_id'] = $user->id;
             $candidateCard->update($validated);
             return new CandidateCardResource($candidateCard);
         }

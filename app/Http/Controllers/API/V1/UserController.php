@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['checkGroup:super-user,pic'], ['except' => ['update']]);
+        $this->middleware(['checkGroup:super-user,pic,admin'], ['except' => ['update']]);
     }
 
     /**

@@ -22,7 +22,7 @@ class CandidateCardResource extends JsonResource
             'created_at' => $this->created_at,
             'erf' => new ErfResource($this->erf),
             'interview_detail' => new InterviewDetailResource($this->interviewDetail),
-            'last_updated_by' => $this->lastUpdatedBy->name,
+            'last_updated_by' => $this->lastUpdatedBy,
             'status' => $this->status,
             'talent' => new TalentResource($this->talent)
         ];

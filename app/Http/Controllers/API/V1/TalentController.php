@@ -25,7 +25,8 @@ class TalentController extends Controller
     public function index()
     {
         return TalentResource::collection(
-            Talent::latest()
+            Talent::filter()
+                ->latest()
                 ->paginate(10)
         );
     }

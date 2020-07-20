@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
 
     Route::post('talents/{talent}', 'API\V1\TalentController@update');
     Route::post('register', 'API\V1\AuthController@register')->name('api.register');
+    Route::post('update-notification', 'API\V1\EmailNotification');
 });
 
 //AUTHS
