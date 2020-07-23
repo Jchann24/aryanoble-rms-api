@@ -22,15 +22,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //SUPERUSER ROUTES
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::apiResource('users', 'API\V1\UserController')->except('store');
+    Route::apiResource('user-detail', 'API\V1\UserDetailController');
     Route::apiResource('erfs', 'API\V1\ErfController');
     Route::apiResource('candidate-cards', 'API\V1\CandidateCardController');
     Route::apiResource('talents', 'API\V1\TalentController');
     Route::apiResource('interview-details', 'API\V1\InterviewDetailController');
+    Route::apiResource('images', 'API\V1\ImageController');
 
     Route::post('talents/{talent}', 'API\V1\TalentController@update');
     Route::post('register', 'API\V1\AuthController@register')->name('api.register');
     Route::post('update-notification', 'API\V1\EmailNotification');
     Route::post('form-email', 'API\V1\FormEmail');
+    Route::get('form-download', 'API\V1\FormDownloadController');
 });
 
 //AUTHS

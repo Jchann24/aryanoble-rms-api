@@ -110,6 +110,16 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(InterviewDetail::class, 'admin_id');
     }
 
+    public function userDetail()
+    {
+        return $this->hasOne(UserDetail::class);
+    }
+
+    public function image()
+    {
+        return $this->morphOne('App\Models\Image', 'imageable')->latest();
+    }
+
 
     public function is($groupName)
     {
