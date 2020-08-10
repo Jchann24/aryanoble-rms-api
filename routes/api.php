@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::post('update-notification', 'API\V1\EmailNotification');
     Route::post('form-email', 'API\V1\FormEmail');
     Route::get('form-download', 'API\V1\FormDownloadController');
+    Route::post('password-change/{user}', 'API\V1\PasswordChangeController');
 });
 
 //AUTHS

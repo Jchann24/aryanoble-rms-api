@@ -27,7 +27,8 @@ class CandidateCardController extends Controller
         $loggedInUser = Auth::user()->id;
 
         return Auth::user()->group_id == 2 ?
-            CandidateCardResource::collection(CandidateCard::latest()->paginate(6)) : CandidateCardResource::collection(
+            CandidateCardResource::collection(CandidateCard::latest()->paginate(6)) //else
+            : CandidateCardResource::collection(
                 CandidateCard::whereHas('erf', function ($q) {
                     $loggedInUser = Auth::user()->id;
                     $q->where('erfs.div_user_id', $loggedInUser);

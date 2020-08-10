@@ -38,6 +38,10 @@ class ErfResource extends JsonResource
             'work_location' => $this->work_location,
             'working_hours' => $this->working_hours,
             'div_user' => $this->divUser,
+            'cards' => [
+                // 'link' => CandidateCardsLinkResource::collection($this->candidateCards),
+                'count' => $this->candidateCards->count()
+            ]
         ];
     }
 }

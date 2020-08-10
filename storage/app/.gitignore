@@ -1,3 +1,6 @@
-*
-!public/
+#*
+#!public/
+public/cv/*
+public/form/*
+public/prof_pic/*
 !.gitignore
