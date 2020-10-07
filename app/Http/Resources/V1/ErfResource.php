@@ -41,7 +41,8 @@ class ErfResource extends JsonResource
             'cards' => [
                 // 'link' => CandidateCardsLinkResource::collection($this->candidateCards),
                 'count' => $this->candidateCards->count()
-            ]
+            ],
+            'acceptance' => $this->erfAcceptance
         ];
     }
 }

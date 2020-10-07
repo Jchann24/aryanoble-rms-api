@@ -5,9 +5,12 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreErf;
 use App\Http\Resources\V1\ErfResource;
+use App\Mail\ErfAcceptance;
 use App\Models\Erf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 
 class ErfController extends Controller
 {
@@ -39,11 +42,18 @@ class ErfController extends Controller
     public function store(StoreErf $request)
     {
         $divUserId = Auth::user()->group_id == 4 ? Auth::user()->id : null;
+        $email = env('ERF_ACCEPT_EMAIL');
+
         if ($divUserId) {
             $validated = $request->validated();
             $validated['div_user_id'] = Auth::user()->id;
 
             $erf = Erf::create($validated);
+            $erf['hashed'] = Crypt::encryptString($erf->id);
+
+            Mail::to($email)
+                ->send(new ErfAcceptance($erf));
+
             return new ErfResource($erf);
         } else {
             return response()

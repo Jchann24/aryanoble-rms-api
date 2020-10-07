@@ -22,4 +22,9 @@ class Erf extends Model
     {
         return $this->hasMany(CandidateCard::class);
     }
+
+    public function erfAcceptance()
+    {
+        return $this->hasOne(ErfAcceptance::class);
+    }
 }

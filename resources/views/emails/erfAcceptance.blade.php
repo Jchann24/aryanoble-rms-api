@@ -359,7 +359,7 @@
     </head>
 
     <body class="">
-        <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+        <span class="preheader">{{$erf->title}}</span>
         <table role="presentation"
                border="0"
                cellpadding="0"
@@ -383,13 +383,11 @@
                                            cellspacing="0">
                                         <tr>
                                             <td>
-                                                <p>Hi {{$user->name}},</p>
-                                                <p>Congratulations! If you can see this email, your account has been
-                                                    created and you can access to our Recruitment Management System!</p>
+                                                <p>Hi, this ERF needs your review,</p>
                                                 <br />
-                                                <p>Name: {{$user->name}}</p>
-                                                <p>Email: {{$user->email}}</p>
-                                                <p>Default Password: <strong><i>aryanoble</i></strong></p>
+                                                <p><strong>Title:</strong> {{$erf->title}}</p>
+                                                <p><strong>Company:</strong> {{$erf->company}}</p>
+                                                <p><strong>Job Title:</strong> {{$erf->job_title}}</p>
                                                 <br />
                                                 <table role="presentation"
                                                        border="0"
@@ -405,8 +403,8 @@
                                                                        cellspacing="0">
                                                                     <tbody>
                                                                         <tr>
-                                                                            <td> <a href="{{env('FRONTEND_URL')}}"
-                                                                                   target="_blank">Login Here</a>
+                                                                            <td> <a href="{{env('FRONTEND_URL').'/review-erf'.'/'.$erf->hashed}}"
+                                                                                   target="_blank">Review Here</a>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>

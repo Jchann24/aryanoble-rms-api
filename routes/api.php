@@ -44,3 +44,9 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function () {
     Route::post('refresh', 'API\V1\AuthController@refresh')->name('api.jwt-refresh');
     Route::get('me', 'API\V1\AuthController@me')->name('api.me');
 });
+
+//PUB ROUTES
+Route::group(['prefix' => 'v1'], function () {
+    Route::get('review-erf/{id}', 'API\V1\ErfAcceptanceController@show');
+    Route::post('review-erf', 'API\V1\ErfAcceptanceController@store');
+});
