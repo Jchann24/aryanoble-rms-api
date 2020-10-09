@@ -31,6 +31,6 @@ class AccountCreated extends Mailable
     public function build()
     {
         return $this->subject("Hello! Congratulations Welcome to Our Recruitment Management System!")
-            ->view('emails.accountCreated');
+            ->markdown('emails.AccountCreated');
     }
 }

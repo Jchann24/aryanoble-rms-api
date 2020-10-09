@@ -8,11 +8,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ErfAcceptance extends Mailable
+class ErfCreated extends Mailable
 {
     use Queueable, SerializesModels;
-
     public $erf;
+
     /**
      * Create a new message instance.
      *
@@ -31,6 +31,6 @@ class ErfAcceptance extends Mailable
     public function build()
     {
         return $this->subject("You have new ERF waiting for your review!")
-            ->view('emails.erfAcceptance');
+            ->markdown('emails.ErfCreated');
     }
 }

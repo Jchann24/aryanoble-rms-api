@@ -29,6 +29,6 @@ class UpdateNotification extends Mailable
     public function build()
     {
         return $this->subject("You have an updated information!")
-            ->view('emails.updateNotification');
+            ->markdown('emails.UpdateNotification');
     }
 }

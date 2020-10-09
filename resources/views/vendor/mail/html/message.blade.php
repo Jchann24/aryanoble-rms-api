@@ -1,8 +1,8 @@
 @component('mail::layout')
 {{-- Header --}}
 @slot('header')
-@component('mail::header', ['url' => config('app.url')])
-{{ config('app.name') }}
+@component('mail::header', ['url' => env('FRONTEND_URL')])
+Arya Noble RMS
 @endcomponent
 @endslot
 

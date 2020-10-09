@@ -32,6 +32,6 @@ class FormEmail extends Mailable
             ->attachFromStorage('form/application.xls', 'DGV_Application.xls', [
                 'mime' => 'application/vnd.ms-excel'
             ])
-            ->view('emails.formEmail');
+            ->markdown('emails.FormEmail');
     }
 }

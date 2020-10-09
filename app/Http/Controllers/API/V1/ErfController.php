@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreErf;
 use App\Http\Resources\V1\ErfResource;
-use App\Mail\ErfAcceptance;
+use App\Mail\ErfCreated;
 use App\Models\Erf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +52,7 @@ class ErfController extends Controller
             $erf['hashed'] = Crypt::encryptString($erf->id);
 
             Mail::to($email)
-                ->send(new ErfAcceptance($erf));
+                ->send(new ErfCreated($erf));
 
             return new ErfResource($erf);
         } else {
