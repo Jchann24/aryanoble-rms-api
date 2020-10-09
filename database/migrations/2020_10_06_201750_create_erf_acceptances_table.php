@@ -18,6 +18,8 @@ class CreateErfAcceptancesTable extends Migration
             $table->unsignedBigInteger('erf_id');
             $table->tinyInteger('acceptance');
             $table->text('notes')->nullable();
+            $table->text('notes_by_pic')->nullable();
+            $table->string('last_updated_by')->nullable();
             $table->timestamps();
 
             $table->foreign('erf_id')->references('id')->on('erfs');

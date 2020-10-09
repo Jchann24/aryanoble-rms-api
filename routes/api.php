@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'v1'], function () {
     Route::post('form-email', 'API\V1\FormEmail');
     Route::get('form-download', 'API\V1\FormDownloadController');
     Route::post('password-change/{user}', 'API\V1\PasswordChangeController');
+
+    Route::patch('review-erf/{id}', 'API\V1\ErfAcceptanceController@update');
 });
 
 //AUTHS

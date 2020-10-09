@@ -27,7 +27,7 @@ class ErfController extends Controller
                 ->latest()
                 ->paginate(10);
         } else if (Auth::user()->is("PIC_TA_Group")) {
-            $erfs = Erf::with('divUser')
+            $erfs = Erf::has('erfAcceptance')->with('divUser')
                 ->latest()
                 ->paginate(10);
         }

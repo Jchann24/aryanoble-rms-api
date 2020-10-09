@@ -7,10 +7,15 @@ use App\Http\Resources\V1\ErfResource;
 use App\Models\Erf;
 use App\Models\ErfAcceptance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class ErfAcceptanceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['checkGroup:pic'], ['only' => 'update']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,6 +39,12 @@ class ErfAcceptanceController extends Controller
             'acceptance' => 'required|numeric',
             'hashed' => 'required|string',
         ]);
+
+        if ($request->input('acceptance') == 0 && $request->input('notes') == null) {
+            return response()
+                ->json(['error' => 'REJECTION NOTES MUST BE FILLED IF YOU REJECT THIS ERF'], 400);
+        }
+
         $decrypt = Crypt::decryptString($request->input('hashed'));
 
         if ($decrypt != $request->input('erf_id')) {
@@ -81,7 +92,18 @@ class ErfAcceptanceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'notes' => 'required|string'
+        ]);
+
+        $erfAcceptance = ErfAcceptance::where('erf_id', $id)->firstOrFail();
+        $erfAcceptance->acceptance = 100;
+        $erfAcceptance->notes_by_pic = $request->input('notes');
+        $erfAcceptance->last_updated_by = Auth::user()->email;
+        $erfAcceptance->save();
+
+        return response()
+            ->json(['success' => 'erf successfully rejected.'], 200);
     }
 
     /**
