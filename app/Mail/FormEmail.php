@@ -28,7 +28,7 @@ class FormEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject("You received our form!")
+        return $this->subject("Arya Noble - You Have Received Our Form!")
             ->attachFromStorage('form/application.xls', 'DGV_Application.xls', [
                 'mime' => 'application/vnd.ms-excel'
             ])

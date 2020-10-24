@@ -28,7 +28,7 @@ class UpdateNotification extends Mailable
      */
     public function build()
     {
-        return $this->subject("You have an updated information!")
+        return $this->subject("Arya Noble - You Have an Updated Information!")
             ->markdown('emails.UpdateNotification');
     }
 }

@@ -30,7 +30,7 @@ class ErfCreated extends Mailable
      */
     public function build()
     {
-        return $this->subject("You have new ERF waiting for your review!")
+        return $this->subject("Arya Noble - You Have New ERF Waiting for Your Approval!")
             ->markdown('emails.ErfCreated');
     }
 }
