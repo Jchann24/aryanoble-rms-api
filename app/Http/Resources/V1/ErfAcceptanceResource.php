@@ -17,7 +17,8 @@ class ErfAcceptanceResource extends JsonResource
         return [
             'id' => $this->id,
             'acceptance' => $this->acceptance,
-            'notes' => $this->notes
+            'notes' => $this->notes,
+            'notes_by_pic' => $this->notes_by_pic
         ];
     }
 }

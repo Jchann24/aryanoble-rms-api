@@ -62,7 +62,8 @@ class ErfAcceptanceController extends Controller
 
         $acceptance = $erf->erfAcceptance()->create([
             'acceptance' => $request->input('acceptance'),
-            'notes' => $request->input('notes')
+            'notes' => $request->input('notes'),
+            'last_updated_by' => 'Leader LHC'
         ]);
 
         return response()
@@ -93,17 +94,22 @@ class ErfAcceptanceController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'notes' => 'required|string'
+            'acceptance' => 'required|numeric'
         ]);
 
         $erfAcceptance = ErfAcceptance::where('erf_id', $id)->firstOrFail();
-        $erfAcceptance->acceptance = 100;
+        $erfAcceptance->acceptance = $request->input('acceptance');
         $erfAcceptance->notes_by_pic = $request->input('notes');
         $erfAcceptance->last_updated_by = Auth::user()->email;
         $erfAcceptance->save();
 
+        if ($erfAcceptance->acceptance == 3) {
+            $message = "Erf successfully accepted";
+        } else {
+            $message = "Erf successfully rejected";
+        }
         return response()
-            ->json(['success' => 'erf successfully rejected.'], 200);
+            ->json(['message' => $message], 200);
     }
 
     /**

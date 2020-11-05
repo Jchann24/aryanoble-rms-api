@@ -23,13 +23,13 @@ class StatusesSeeder extends Seeder
             'state' => "Talent accepted by User, Waiting candidate account creation by PIC",
         ]);
         DB::table('statuses')->insert([
-            'state' => "Candidate Account Created by PIC, Waiting Interview Details creation by Admin",
+            'state' => "Candidate Account Created by PIC, Waiting Interview Details to be set.",
         ]);
         DB::table('statuses')->insert([
-            'state' => "Interview Details Created by Admin, Waiting Form sent to candidate by Admin",
+            'state' => "Interview Details set, Waiting form sent to candidate.",
         ]);
         DB::table('statuses')->insert([
-            'state' => "Candidate Form Sent by Admin",
+            'state' => "Candidate Form Sent",
         ]);
         DB::table('statuses')->insert([
             'id' => 100,
